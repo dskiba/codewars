@@ -14,7 +14,6 @@
 
 
 function narcissistic(value) {
-  // Code me
   const arrVal = value.toString().split('');
   const powN = arrVal.length;
   const arrNum = arrVal.map(x => Math.pow(+x,powN) );
@@ -23,4 +22,4 @@ function narcissistic(value) {
   return isDigit;
 };
 
-
+console.log(narcissistic(153));

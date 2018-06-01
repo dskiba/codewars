@@ -22,4 +22,9 @@ function isIsogram(str) {
     }
   }
   return true;
-}
+};
+
+console.log(isIsogram('Dermatoglyphics'));
+console.log(isIsogram('moOse'));
+
+
