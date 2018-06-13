@@ -7,20 +7,25 @@
 // The tests contain some very huge arrays, so think about performance.
 
 function findUniq(arr) {
-  // do magic
   const filteredArr = arr.filter(val => arr.indexOf(val) == arr.lastIndexOf(val));
   return filteredArr;
 };
 
 
-const test1 = [ 0, 1, 0, 0, 0 ];
-const test2 = [ 1, 1, 1, 2, 1, 1 ];
-const test3 = [ 3, 10, 3, 3, 3 ];
+const test1 = [0, 1, 0, 0, 0];
+const test2 = [1, 1, 1, 2, 1, 1];
+const test3 = [3, 10, 3, 3, 3];
 
 
-console.log(findUniq(test1));
-console.log(findUniq(test2));
-console.log(findUniq(test3));
+console.log(findUniq(test1)); //1
+console.log(findUniq(test2)); //2
+console.log(findUniq(test3)); //10
+
+
+// function findUniq(arr) {
+//   arr.sort((a,b)=>a-b);
+//   return arr[0]==arr[1]?arr.pop():arr[0]
+// }
 
 
 
