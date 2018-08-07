@@ -5,3 +5,5 @@ function rot13(message) {
 }
 
 console.log(rot13('teeest')); //grrrfg
+
+console.log(rot13('lul')); //yhy
