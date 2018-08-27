@@ -4,31 +4,68 @@
 // items fit within a single page
 
 class PaginationHelper {
-  static itemCount(collection) {
-    return collection.length;
+  constructor(collection, itemsPerPage) {
+    this.itemsPerPage = itemsPerPage;
+    this.collection = collection;
   }
 
-  static pageCount(collection, itemsPerPage) {
-    return Math.ceil(itemCount(collection) / itemsPerPage);
+  itemCount() {
+    return this.collection.length;
   }
 
-  static logy(string) {
-    console.log(string)
+  pageCount() {
+    return Math.ceil(this.itemCount() / this.itemsPerPage);
   }
 
-  static pageItemCount(num) {
-
+  fullPageCount() {
+    return Math.floor(this.itemCount() / this.itemsPerPage);
   }
 
-  // should == -1 since the page is invalid
+  pageItemCount(num) {
+    if (num < this.pageCount()) {
+      return this.itemsPerPage;
+    }
+    else if (num = this.pageCount()) {
+      return this.itemCount() % this.itemsPerPage
+    }
+    return -1;
+  }
 
-  pageIndex(num) {
-
+  pageIndex(item) {
+    if (item <= this.itemsPerPage) {
+      return 1
+    }
+    else if (item == this.itemCount()) {
+      return this.pageCount()
+    }
+    else if (item < this.itemCount()) {
+      let answer;
+      for (answer = 1; answer <= this.pageCount(); answer++) {
+        if (item <= (this.itemsPerPage * answer)) {
+          return answer;
+        }
+      }
+    }
+    return -1;
   }
 
 }
 
-console.log(PaginationHelper.itemCount());
+
+let array = [];
+array.length = 47865478;
+console.log(array.length);
+
+const helpers = new PaginationHelper(array, 1736)
+console.log('количество  роллов', helpers.itemCount());
+console.log('количество контейнеров', helpers.pageCount());
+console.log('контейнеров заполненных полностью', helpers.fullPageCount());
+console.log('в контейнере столько то роллов', helpers.pageItemCount(27573));
+console.log('ролл лежат в этом контейнере', helpers.pageIndex(784678));
+
+
+
+
 
 // // returns the number of items within the entire collection
 // PaginationHelper.prototype.itemCount = function() {
