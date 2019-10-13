@@ -1,0 +1,9 @@
+{
+  "name": "Codewars",
+  "version": "1.0.0",
+  "description": "Codewars and Katas",
+  "main": "index.js",
+  "repository": "git@github.com:dskiba/codewars.git",
+  "author": "Denis Skiba <dskiba@docdoc.ru>",
+  "license": "MIT"
+}
