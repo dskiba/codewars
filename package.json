@@ -7,12 +7,23 @@
   "author": "Denis Skiba <dskiba@docdoc.ru>",
   "license": "MIT",
   "dependencies": {
-    "babel-eslint": "^10.0.3",
-    "eslint": "^6.5.1",
-    "jest": "^24.9.0"
+    "inquirer": "^6.2.0"
   },
   "devDependencies": {
     "eslint-config-airbnb-base": "^14.0.0",
-    "eslint-plugin-import": "^2.18.2"
+    "eslint-plugin-import": "^2.18.2",
+    "babel-core": "^6.26.3",
+    "babel-eslint": "^10.0.1",
+    "babel-jest": "^23.6.0",
+    "babel-preset-env": "^1.7.0",
+    "cross-env": "^5.2.0",
+    "eslint": "^6.5.1",
+    "jest": "^23.6.0",
+    "lodash": "^4.17.11"
+  },
+  "scripts": {
+    "test": "jest",
+    "lint": "eslint",
+    "generate": "cross-env ./scripts/generate.js"
   }
 }
