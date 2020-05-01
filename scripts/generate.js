@@ -4,22 +4,6 @@ const path = require('path');
 const fs = require('fs');
 const inquirer = require('inquirer');
 
-(async () => {
-  let name = process.argv[2];
-
-  if (!name) {
-    const { answer } = await inquirer.prompt({
-      type: 'input',
-      name: 'answer',
-      message: 'What is the name of the new function?',
-    });
-
-    name = answer;
-  }
-
-  generateMethodFile(name);
-  generateTestFile(name);
-})();
 
 function generateMethodFile(name) {
   const filename = path.resolve(__dirname, `../src/${name}.js`);
@@ -28,7 +12,7 @@ export const ${name} = () => {
   // TO IMPLEMENT IN ANOTHER PR
 };\n`;
 
-  fs.writeFile(filename, content, function(err) {
+  fs.writeFile(filename, content, (err) => {
     if (err) {
       return console.log(`Could not create the "${name}.js" file!`);
     }
@@ -75,7 +59,7 @@ describe('${name}', () => {
   });
 });\n`;
 
-  fs.writeFile(filename, content, function(err) {
+  fs.writeFile(filename, content, (err) => {
     if (err) {
       return console.log(`Could not create the "${name}.test.js" file!`);
     }
@@ -83,3 +67,19 @@ describe('${name}', () => {
     console.log(`Successfully created the "${name}.test.js" file!`);
   });
 }
+(async () => {
+  let name = process.argv[2];
+
+  if (!name) {
+    const { answer } = await inquirer.prompt({
+      type: 'input',
+      name: 'answer',
+      message: 'What is the name of the new function?',
+    });
+
+    name = answer;
+  }
+
+  generateMethodFile(name);
+  generateTestFile(name);
+})();

@@ -8,7 +8,7 @@ function seeChangedFiles(cb) {
     const files = chain(out)
       .split('\n')
       .filter()
-      .map(s => s.split('\t'))
+      .map((s) => s.split('\t'))
       .map(([status, filename]) => ({
         filename,
         isAdded: status === 'A',
@@ -27,7 +27,7 @@ function runCommand(command, argv) {
   return status;
 }
 
-seeChangedFiles(files => {
+seeChangedFiles((files) => {
   const modifiedImplems = filter(files, { isModified: true, isTest: false });
   const addedImplems = filter(files, { isAdded: true, isTest: false });
   const addedTests = filter(files, { isAdded: true, isTest: true });
@@ -36,9 +36,9 @@ seeChangedFiles(files => {
 
   // Not enough changes in this PR...
   if (
-    modifiedImplems.length !== 1 ||
-    addedImplems.length !== 1 ||
-    addedTests.length !== 1
+    modifiedImplems.length !== 1
+    || addedImplems.length !== 1
+    || addedTests.length !== 1
   ) {
     console.error(`\
 ###################################
@@ -78,8 +78,8 @@ the other hand, if you fixed a test case, then it's ok.
 
 Here are the files that you changed:
 ${files
-      .map(f => `- ${f.filename} ${f.isAdded ? '(NEW)' : '(MODIFIED)'}`)
-      .join('\n')}
+    .map((f) => `- ${f.filename} ${f.isAdded ? '(NEW)' : '(MODIFIED)'}`)
+    .join('\n')}
 `);
   }
 
@@ -108,6 +108,6 @@ Running command: "jest ${testFileToRun}"
 
   // Exit with the same status as the tests
   const actualStatus = shoudExitWithFailure ? 1 : lintStatus || testStatus;
-  console.log('Exiting with status: ' + actualStatus);
+  console.log(`Exiting with status: ${actualStatus}`);
   process.exit(actualStatus);
 });
