@@ -7,7 +7,6 @@ export const findJudge = (N, trust) => {
     count.set(id, count.has(id) ? count.get(id) - 1 : -1)
     count.set(target, count.has(target) ? count.get(target) + 1 : 1)
   }
-  console.log({ count });
   [...count].forEach((t) => {
     const [id, score] = t
     if (score === N - 1) res = id
