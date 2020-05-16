@@ -1,85 +1,67 @@
 #! /usr/bin/env node
 
-const path = require('path');
-const fs = require('fs');
-const inquirer = require('inquirer');
+const path = require('path')
+const fs = require('fs')
+const inquirer = require('inquirer')
 
+
+function generateDir(name) {
+  fs.mkdir(`./src/${name}`, { recursive: true }, (err) => {
+    if (err) throw err;
+  });
+}
 
 function generateMethodFile(name) {
-  const filename = path.resolve(__dirname, `../src/${name}.js`);
+  const filename = path.resolve(__dirname, `../src/${name}/${name}.js`)
   const content = `\
 export const ${name} = () => {
   // TO IMPLEMENT IN ANOTHER PR
-};\n`;
+};\n`
 
   fs.writeFile(filename, content, (err) => {
     if (err) {
-      return console.log(`Could not create the "${name}.js" file!`);
+      return console.log(`Could not create the "${name}.js" file!`)
     }
 
-    console.log(`Successfully created the "${name}.js" file!`);
-  });
+    console.log(`Successfully created the "${name}.js" file!`)
+  })
 }
 
 function generateTestFile(name) {
-  const filename = path.resolve(__dirname, `../src/${name}.test.js`);
+  const filename = path.resolve(__dirname, `../src/${name}/${name}.test.js`)
   const content = `\
 import { ${name} } from './${name}';
 
-/*
- * Example of the assertions you can use for your tests:
- *
- * - Testing equality between the function's output and a constant:
- * expect(${name}()).toEqual(123);
- *
- * - Testing that the function returns null:
- * expect(${name}()).toBeNull();
- *
- * - Testing that the function returns a falsy value (eg. false, 0, "")
- * expect(${name}()).toBeFalsy();
- *
- * - Testing that the function returns a truthy value (eg. true, 1, "abc")
- * expect(${name}()).toBeTruthy();
- *
- * - Testing that the function throws
- * expect(() => { ${name}(); }).toThrow();
- */
-
 describe('${name}', () => {
   it('${name} does this thing...', () => {
-    // TODO Your own assertion here
+    const input = null
+    const res = null
+    expect(${name}(input)).toEqual(res)
   });
+});\n`
 
-  it('${name} does that other thing...', () => {
-    // TODO Your own assertion here
-  });
-
-  it('${name} does a very cool thing...', () => {
-    // TODO Your own assertion here
-  });
-});\n`;
-
+  // eslint-disable-next-line consistent-return
   fs.writeFile(filename, content, (err) => {
     if (err) {
-      return console.log(`Could not create the "${name}.test.js" file!`);
+      return console.log(`Could not create the "${name}.test.js" file!`)
     }
 
-    console.log(`Successfully created the "${name}.test.js" file!`);
-  });
+    console.log(`Successfully created the "${name}.test.js" file!`)
+  })
 }
-(async () => {
-  let name = process.argv[2];
 
+(async () => {
+  let name = process.argv[2]
   if (!name) {
     const { answer } = await inquirer.prompt({
       type: 'input',
       name: 'answer',
       message: 'What is the name of the new function?',
-    });
-
-    name = answer;
+    })
+    name = answer
   }
 
-  generateMethodFile(name);
-  generateTestFile(name);
-})();
+  generateDir(name)
+  generateMethodFile(name)
+  generateTestFile(name)
+})()

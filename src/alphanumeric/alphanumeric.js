@@ -20,12 +20,13 @@ const solution = function (isBadVersion) {
     let res = null
     for (let i = n; i > 0; i--) {
       if (!isBadVersion(i)) {
-            i > 1 ? res=i+1 : res = 1
+        i > 1 ? res = i + 1 : res = 1
       }
     }
-  return res
-};
+    return res
+  }
+}
 
 const isBadVersionF = (n) => n === 4
 
-solution(isBadVersionF)(5)
+// solution(isBadVersionF)(5)
