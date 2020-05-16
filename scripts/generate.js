@@ -50,6 +50,21 @@ describe('${name}', () => {
   })
 }
 
+function generateMdFile(name) {
+  const filename = path.resolve(__dirname, `../src/${name}/${name}.md`)
+  const content = `\
+  Your request here.
+  \n`
+
+  fs.writeFile(filename, content, (err) => {
+    if (err) {
+      return console.log(`Could not create the "${name}.md" file!`)
+    }
+
+    console.log(`Successfully created the "${name}.md" file!`)
+  })
+}
+
 (async () => {
   let name = process.argv[2]
   if (!name) {
@@ -64,4 +79,5 @@ describe('${name}', () => {
   generateDir(name)
   generateMethodFile(name)
   generateTestFile(name)
+  generateMdFile(name)
 })()
